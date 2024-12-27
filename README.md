@@ -1,5 +1,3 @@
-# react-js-infoeste
-
 # Install
 
 ```bash
