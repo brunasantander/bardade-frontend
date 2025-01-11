@@ -28,10 +28,10 @@ export const MobileNavbar = () => {
                                 <MobileNavLink to="/">Home</MobileNavLink>
                             </ListItem>
                             <ListItem>
-                                <MobileNavLink to="/corpo-docente">Corpo Docente</MobileNavLink>
+                                <MobileNavLink to="/pedidos">Pedidos</MobileNavLink>
                             </ListItem>
                             <ListItem>
-                                <MobileNavLink to="/contato">Contato</MobileNavLink>
+                                <MobileNavLink to="/mesa">Mesa</MobileNavLink>
                             </ListItem>
                         </MobileList>
                     </MobileNavItem>

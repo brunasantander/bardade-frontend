@@ -12,10 +12,10 @@ export const Navbar = () => {
             <NavLink to="/">Home</NavLink>
           </ListItem>
           <ListItem>
-            <NavLink to="/corpo-docente">Pedidos</NavLink>
+            <NavLink to="/pedidos">Pedidos</NavLink>
           </ListItem>
           <ListItem>
-            <NavLink to="/contato">Mesa</NavLink>
+            <NavLink to="/mesa">Mesa</NavLink>
           </ListItem>
         </List>
         <MobileNavbar />

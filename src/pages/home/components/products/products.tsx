@@ -1,4 +1,5 @@
 import { useState, useEffect } from "react";
+import { useNavigate } from "react-router-dom";
 import { Produto } from "../../../../entities/produtos";
 import {
   Carrinho,
@@ -15,32 +16,51 @@ import {
   QuantidadeMenos,
   Wrapper,
 } from "./products.styles";
+import { AddToCartModal } from "../addToCartModal/addToCartmodal";;
 import { typeMapping } from "../../mapper/typeMapper";
+
 export const Cardapio = () => {
-  var [produtos, setProdutos] = useState<Produto[]>([]);
-  const [quantidades, setQuantidades] = useState<{ [id: string]: number }>({});
-  const [carrinho, setCarrinho] = useState<Produto[]>([]);
+  const [produtos, setProdutos] = useState<Produto[]>([]);
+  const [amounts, setAmounts] = useState<{ [id: string]: number }>({});
+  var [cart, setCart] = useState<Produto[]>([]);
+  const [isModalOpen, setIsModalOpen] = useState(false);
+  const [selectedProduct, setSelectedProduct] = useState<Produto | null>(null);
+  const navigate = useNavigate();
 
   useEffect(() => {
     fetch("http://localhost:3000/api/products", { method: "get" })
       .then((response) => response.json())
       .then((value: Produto[]) => {
         setProdutos(value);
-        produtos = value;
       });
   }, []);
 
   const handleQuantidadeChange = (id: number, delta: number) => {
-    setQuantidades((prev) => ({
+    setAmounts((prev) => ({
       ...prev,
       [id]: Math.max(1, (prev[id] || 1) + delta),
     }));
   };
 
   const adicionarAoCarrinho = (produto: Produto) => {
-    const quantidade = quantidades[produto.id];
-    const itemCarrinho = { ...produto, quantidade };
-    setCarrinho((prev) => [...prev, itemCarrinho]);
+    setSelectedProduct(produto);
+    cart.push(produto);
+    setIsModalOpen(true);
+  };
+
+  const handleModalSubmit = async () => {
+    if (cart.length > 0) {
+      let total = 0;
+      let amount = 0;
+      let cartItem: { amount: number; id: number; name: string; type: string; price: number; }[] = [];
+      cart.forEach((item) => {
+        amount = amounts[item.id] || 1;
+        total += amount * item.price;
+        cartItem.push({...item, amount: amount});
+      });
+
+      navigate("/pedidos", { state: { cart: cartItem, total: total} });
+    }
   };
 
   return (
@@ -61,7 +81,7 @@ export const Cardapio = () => {
                 >
                   -
                 </QuantidadeMenos>
-                <Quantidade>{quantidades[produto.id] || 1}</Quantidade>
+                <Quantidade>{amounts[produto.id] || 1}</Quantidade>
                 <QuantidadeMais
                   onClick={() => handleQuantidadeChange(produto.id, 1)}
                 >
@@ -75,6 +95,11 @@ export const Cardapio = () => {
           </Item>
         ))}
       </Lista>
+      <AddToCartModal
+        isOpen={isModalOpen}
+        onClose={() => setIsModalOpen(false)}
+        onSubmit={handleModalSubmit}
+      />
     </Container>
   );
 };
