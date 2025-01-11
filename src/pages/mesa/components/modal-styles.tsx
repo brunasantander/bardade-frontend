@@ -5,10 +5,18 @@ export const ModalWrapper = styled.div`
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
+  width: 80%;
+  max-width: 800px;
+  height: 70%;
+  max-height: 600px;
   background: white;
   padding: 20px;
   border-radius: 8px;
   box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+  display: flex;
+  flex-direction: column;
+  overflow-y: auto;
+  position: relative;
 `;
 
 export const Overlay = styled.div`
@@ -20,9 +28,13 @@ export const Overlay = styled.div`
   background: rgba(0, 0, 0, 0.5);
   z-index: 999;
 `;
+
 export const ButtonGroup = styled.div`
+  position: absolute;
+  bottom: 20px;
+  right: 20px;
   display: flex;
-  justify-content: space-around;
+  gap: 10px;
 `;
 
 export const Button = styled.button`
@@ -33,6 +45,7 @@ export const Button = styled.button`
   border-radius: 4px;
   cursor: pointer;
   font-size: 16px;
+  margin-right: 10px;
 
   &:hover {
     background-color: #f8c093;
@@ -87,6 +100,18 @@ export const TotalPreco = styled.p`
 
 export const TotalWrapper = styled.div`
   display: flex;
-  align-items: start;
+  justify-content: space-between;
+  align-items: center;
   margin-bottom: 10px;
+`;
+
+export const PaymentMethodsWrapper = styled.select`
+`;
+
+export const PaymentMethods = styled.option`
+`;
+
+export const PriceWrapper = styled.div`
+  display: flex;
+  align-items: start;
 `;

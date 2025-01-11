@@ -8,6 +8,9 @@ import {
   Total,
   TotalPreco,
   TotalWrapper,
+  PaymentMethodsWrapper,
+  PaymentMethods,
+  PriceWrapper,
 } from "./modal-styles";
 import { Items } from "../../../entities/items";
 import { Key, useState } from "react";
@@ -15,6 +18,7 @@ import { PaymentModal } from "../components/pagamento/modal";
 
 export const Modal = ({ isOpen, onClose, selectedTable, orders }: any) => {
   const [isModalOpen, setIsModalOpen] = useState(false);
+  const [paymentMethod, setPaymentMethod] = useState("");
 
   if (!isOpen) return null;
 
@@ -23,11 +27,19 @@ export const Modal = ({ isOpen, onClose, selectedTable, orders }: any) => {
   };
 
   const closeTable = () => {
-    fetch(`http://localhost:3000/api/table/${selectedTable.id}`, {
-      method: "DELETE",
-    }).then(() => {
-      setIsModalOpen(true);
-    });
+    console.log(paymentMethod);
+    fetch(
+      `http://localhost:3000/api/table/${selectedTable.id}/${paymentMethod}`,
+      {
+        method: "DELETE",
+      }
+    )
+      .then(() => {
+        setIsModalOpen(true);
+      })
+      .catch(() => {
+        alert("Ocorreu um erro ao fechar a mesa");
+      });
   };
 
   const calculateTotal = () => {
@@ -63,8 +75,22 @@ export const Modal = ({ isOpen, onClose, selectedTable, orders }: any) => {
           </tbody>
         </Table>
         <TotalWrapper>
-          <Total>Total Geral: </Total>
-          <TotalPreco> R${calculateTotal().toFixed(2)}</TotalPreco>
+          <PriceWrapper>
+            <Total>Total Geral: </Total>
+            <TotalPreco> R${calculateTotal().toFixed(2)}</TotalPreco>
+          </PriceWrapper>
+          <PaymentMethodsWrapper
+            value={paymentMethod}
+            onChange={(e) => setPaymentMethod(e.target.value)}
+          >
+            <PaymentMethods value="">
+              Selecionar Método de Pagamento
+            </PaymentMethods>
+            <PaymentMethods value="débito">Débito</PaymentMethods>
+            <PaymentMethods value="crédito">Crédito</PaymentMethods>
+            <PaymentMethods value="dinheiro">Dinheiro</PaymentMethods>
+            <PaymentMethods value="pix">Pix</PaymentMethods>
+          </PaymentMethodsWrapper>
         </TotalWrapper>
         <ButtonGroup>
           <Button onClick={closeModal}>Fechar</Button>
