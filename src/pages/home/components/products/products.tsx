@@ -22,9 +22,9 @@ import { typeMapping } from "../../mapper/typeMapper";
 export const Cardapio = () => {
   const [produtos, setProdutos] = useState<Produto[]>([]);
   const [amounts, setAmounts] = useState<{ [id: string]: number }>({});
-  var [cart, setCart] = useState<Produto[]>([]);
+  var [cart] = useState<Produto[]>([]);
   const [isModalOpen, setIsModalOpen] = useState(false);
-  const [selectedProduct, setSelectedProduct] = useState<Produto | null>(null);
+  const [, setSelectedProduct] = useState<Produto | null>(null);
   const navigate = useNavigate();
 
   useEffect(() => {
