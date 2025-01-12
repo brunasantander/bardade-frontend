@@ -29,7 +29,7 @@ export const Modal = ({ isOpen, onClose, selectedTable, orders }: any) => {
   const closeTable = () => {
     console.log(paymentMethod);
     fetch(
-      `http://localhost:3000/api/table/${selectedTable.id}/${paymentMethod}`,
+      `https://bardade-backend.onrender.com/api/table/${selectedTable.id}/${paymentMethod}`,
       {
         method: "DELETE",
       }

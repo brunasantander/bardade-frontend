@@ -48,7 +48,7 @@ export const Orders = () => {
         tableName: tableName,
       };
 
-      fetch("http://localhost:3000/api/table", {
+      fetch("https://bardade-backend.onrender.com/api/table", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",

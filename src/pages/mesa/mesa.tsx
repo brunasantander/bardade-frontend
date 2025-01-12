@@ -21,7 +21,7 @@ export const Mesas = () => {
   const [orders, setOrders] = useState<Items[]>([]);
 
   useEffect(() => {
-    fetch("http://localhost:3000/api/table", { method: "get" })
+    fetch("https://bardade-backend.onrender.com/api/table", { method: "get" })
       .then((response) => response.json())
       .then((value: Mesa[]) => {
         setMesas(value);
@@ -32,7 +32,7 @@ export const Mesas = () => {
     setSelectedMesa(mesa);
     setIsModalOpen(true);
 
-    fetch(`http://localhost:3000/api/table/${mesa.id}`, {
+    fetch(`https://bardade-backend.onrender.com/api/table/${mesa.id}`, {
       method: "get",
     })
       .then((response) => response.json())

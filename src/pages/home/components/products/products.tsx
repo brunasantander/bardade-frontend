@@ -28,7 +28,7 @@ export const Cardapio = () => {
   const navigate = useNavigate();
 
   useEffect(() => {
-    fetch("http://localhost:3000/api/products", { method: "get" })
+    fetch("https://bardade-backend.onrender.com/api/products", { method: "get" })
       .then((response) => response.json())
       .then((value: Produto[]) => {
         setProdutos(value);
