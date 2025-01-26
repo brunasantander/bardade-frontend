@@ -11,6 +11,7 @@ import {
   PaymentMethodsWrapper,
   PaymentMethods,
   PriceWrapper,
+  TableContainer,
 } from "./modal-styles";
 import { Items } from "../../../entities/items";
 import { Key, useState } from "react";
@@ -54,26 +55,28 @@ export const Modal = ({ isOpen, onClose, selectedTable, orders }: any) => {
     <Overlay>
       <ModalWrapper>
         <Title>Pedidos da Mesa {selectedTable.number}</Title>
-        <Table>
-          <thead>
-            <tr>
-              <th>Nome</th>
-              <th>Valor</th>
-              <th>Quantidade</th>
-              <th>Total</th>
-            </tr>
-          </thead>
-          <tbody>
-            {orders.map((order: Items, index: Key | null | undefined) => (
-              <tr key={index}>
-                <td>{order.productName}</td>
-                <td>R$ {order.price.toFixed(2)}</td>
-                <td>{order.amount}</td>
-                <td>R$ {(order.amount * order.price).toFixed(2)}</td>
+        <TableContainer>
+          <Table>
+            <thead>
+              <tr>
+                <th>Nome</th>
+                <th>Valor</th>
+                <th>Quantidade</th>
+                <th>Total</th>
               </tr>
-            ))}
-          </tbody>
-        </Table>
+            </thead>
+            <tbody>
+              {orders.map((order: Items, index: Key | null | undefined) => (
+                <tr key={index}>
+                  <td>{order.productName}</td>
+                  <td>R$ {order.price.toFixed(2)}</td>
+                  <td>{order.amount}</td>
+                  <td>R$ {(order.amount * order.price).toFixed(2)}</td>
+                </tr>
+              ))}
+            </tbody>
+          </Table>
+        </TableContainer>
         <TotalWrapper>
           <PriceWrapper>
             <Total>Total Geral: </Total>

@@ -7,7 +7,7 @@ export const ModalWrapper = styled.div`
   transform: translate(-50%, -50%);
   width: 80%;
   max-width: 800px;
-  height: 70%;
+  height: 100%;
   max-height: 600px;
   background: white;
   padding: 20px;
@@ -29,12 +29,18 @@ export const Overlay = styled.div`
   z-index: 999;
 `;
 
+export const TableContainer = styled.div`
+  flex: 1;
+  overflow-y: auto;
+  margin-bottom: 20px; /* Espaço para os botões */
+`;
+
 export const ButtonGroup = styled.div`
-  position: absolute;
   bottom: 20px;
   right: 20px;
   display: flex;
   gap: 10px;
+  justify-content: flex-end;
 `;
 
 export const Button = styled.button`
@@ -66,7 +72,8 @@ export const Table = styled.table`
   border-collapse: collapse;
   margin-bottom: 20px;
 
-  th, td {
+  th,
+  td {
     border: 1px solid #ddd;
     padding: 8px;
     text-align: left;
@@ -105,11 +112,9 @@ export const TotalWrapper = styled.div`
   margin-bottom: 10px;
 `;
 
-export const PaymentMethodsWrapper = styled.select`
-`;
+export const PaymentMethodsWrapper = styled.select``;
 
-export const PaymentMethods = styled.option`
-`;
+export const PaymentMethods = styled.option``;
 
 export const PriceWrapper = styled.div`
   display: flex;
